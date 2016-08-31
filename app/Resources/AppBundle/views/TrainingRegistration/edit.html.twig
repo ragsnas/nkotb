@@ -1,0 +1,13 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>TrainingRegistration edit</h1>
+
+    {{ form(edit_form) }}
+
+        <div class="btn-group">
+    <a href="{{ path('training_registration_admin') }}" class="btn btn-primary">
+        <i class="fa fa-list"></i> {{ 'common_back-to-list'|trans }}
+    </a>
+        </div>
+{% endblock %}

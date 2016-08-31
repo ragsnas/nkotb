@@ -1,0 +1,31 @@
+{% spaceless %}
+    <!DOCTYPE html>
+    <html lang="{{ app.request.locale }}">
+    <head>
+        <title>{% block title %}{{ 'website_title' | trans }}{% endblock %}</title>
+        <meta charset="{{ _charset }}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {#<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">#}
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        {% block stylesheets -%}
+            <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+            <link href="{{ app.environment == 'dev' ? asset('css/main.css') : asset('css/main.min.css') }}?{{ app.environment == 'dev' ? timestamp() : 'css/main.min.css' | filemtime }}" rel="stylesheet" media="screen">
+        {%- endblock -%}
+        {% include ':Element:favicon.html.twig' %}
+    </head>
+    <body>
+    {% block content -%}{%- endblock %}
+    {% block javascripts -%}
+        <script src="{{ app.environment == 'dev' ? asset('js/main.js') : asset('js/main.min.js') }}?{{ app.environment == 'dev' ? timestamp() : 'js/main.min.js' | filemtime }}"></script>
+    {%- endblock -%}
+
+        <footer style="margin-top:150px;padding:20px;border-top:1px dashed #666; background-color:#ddd;">
+            <div class="container">
+                <p class="pull-right">
+                    <a href="https://www.facebook.com/nkotbcycling"><img src="/images/fb.png" width="15" title="{{ 'social_follow_us_on_facebook'|trans }}" /></a>
+                </p>
+            </div>
+        </footer>
+    </body>
+    </html>
+{% endspaceless %}

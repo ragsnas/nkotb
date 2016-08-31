@@ -1,0 +1,47 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Training: {{ entity.title }}</h1>
+
+    <table class="records_list table table-striped">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ entity.title }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ entity.type }}</td>
+            </tr>
+            <tr>
+                <th>Start</th>
+                <td>{{ entity.start|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>End</th>
+                <td>{{ entity.end|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Destinaton</th>
+                <td>{{ entity.destinaton }}</td>
+            </tr>
+            <tr>
+                <th>Spots</th>
+                <td>{{ entity.spots }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <div class="btn-group">
+    <a href="{{ path('training_admin') }}" class="btn btn-primary">
+        <i class="fa fa-list"></i> {{ 'common_back-to-list'|trans }}
+    </a>
+                <a href="{{ path('training_admin_edit', { 'id': entity.id }) }}"  class="btn btn-primary">
+            <i class="fa fa-edit"></i> {{ 'common_edit'|trans }}
+        </a>
+    </div>
+{% endblock %}

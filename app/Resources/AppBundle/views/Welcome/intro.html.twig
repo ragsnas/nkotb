@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+        <p>
+            {{ 'welcome_intro_greeting_text' | trans({}, "messages", forced_locale) }}
+        </p>
+
+        <div class="btn-group" role="group">
+            <a href="{{ path('welcome') }}" type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> {{ 'welcome_intro_greeting_back' | trans({}, "messages", forced_locale) }}
+            </a>
+            {% if forced_locale in supportedLanguages %}
+                <a href="{{ path('welcome_intro_step', {step: 1, locale: forced_locale}) }}"type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> {{ 'welcome_intro_greeting_next' | trans({}, "messages", forced_locale) }}
+                </a>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

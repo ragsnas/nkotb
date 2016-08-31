@@ -1,0 +1,42 @@
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: bcrypt
+
+    role_hierarchy:
+        ROLE_TRAINING_OBSERVER:       ROLE_USER
+        ROLE_TRAINING_ADMIN: ROLE_TRAINING_OBSERVER
+        ROLE_ADMIN:       ROLE_USER, ROLE_TRAINING_ADMIN
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username_email
+
+    firewalls:
+        main:
+            pattern: ^/
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: form.csrf_provider
+            logout:       true
+            anonymous:    true
+            remember_me:
+                key:      "%secret%"
+                lifetime: 31536000 # 365 days in seconds
+                path:     /
+                domain:   ~
+
+    access_control:
+        - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/training, role: ROLE_TRAINING_OBSERVER }
+        - { path: ^/admin/training-registration, role: ROLE_TRAINING_ADMIN }
+        - { path: ^/admin/training/new, role: ROLE_TRAINING_ADMIN }
+        - { path: ^/admin/training/edit, role: ROLE_TRAINING_ADMIN }
+        - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/doorkey/, role: ROLE_KEY_ADMIN }
+        - { path: ^/doorkey-exchange/, role: ROLE_KEY_ADMIN }
+        - { path: ^/user/, role: ROLE_USER_ADMIN }
+        - { path: ^/shifts/, role: ROLE_USER }

@@ -1,0 +1,69 @@
+    /**
+{% block phpdoc_method_header %}
+     * Edits an existing {{ entity }} entity.
+{% endblock phpdoc_method_header %}
+     *
+{% block phpdoc_method_annotations %}
+{% if 'annotation' == format %}
+     * @Route("/edit/{id}", name="{{ route_name_prefix }}_edit")
+{% endif %}
+{% endblock phpdoc_method_annotations %}
+     */
+{% block method_definition %}
+    public function editAction(Request $request, $id)
+{% endblock method_definition %}
+    {
+{% block method_body %}
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('{{ bundle }}:{{ entity }}')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find {{ entity }} entity.');
+        }
+
+        $deleteForm = $this->createDeleteForm($id);
+        $editForm = $this->createEditForm($entity);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isValid()) {
+            try {
+                $em->flush();
+                $this->addFlash('success', '{{ route_name_prefix }}_edit_success');
+            } catch (\Exception $e) {
+                $this->get('logger')->addError('{{ route_name_prefix }}_edit_error: ' . $e->getMessage());
+                $this->addFlash('error', '{{ route_name_prefix }}_edit_error');
+            }
+            return $this->redirect($this->generateUrl('{{ route_name_prefix }}_edit', array('id' => $id)));
+        }
+{% endblock method_body %}
+
+{% block method_return %}
+    return $this->render('{{ bundle }}:{{ entity|replace({'\\': '/'}) }}:edit.html.twig', array(
+        'entity'      => $entity,
+        'edit_form'   => $editForm->createView(),
+        'delete_form' => $deleteForm->createView(),
+    ));
+{% endblock method_return %}
+    }
+
+{% block form %}
+    /**
+    * Creates a form to edit a {{ entity }} entity.
+    *
+    * @param {{ entity_class }} $entity The entity
+    *
+    * @return \Symfony\Component\Form\Form The form
+    */
+    private function createEditForm({{ entity_class }} $entity)
+    {
+        $form = $this->createForm(new {{ entity_class }}Type(), $entity, array(
+        'action' => $this->generateUrl('{{ route_name_prefix }}_edit', array('id' => $entity->getId())),
+        'method' => 'PUT',
+    ));
+
+    $form->add('submit', 'submit', array('label' => 'common_update'));
+
+    return $form;
+    }
+{% endblock form %}

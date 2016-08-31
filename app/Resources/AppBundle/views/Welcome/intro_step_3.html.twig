@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+        <h2>{{ 'welcome_intro_step_3_title' | trans({}, "messages", forced_locale) }}</h2>
+        <p>
+            {{ 'welcome_intro_step_3_text' | trans({}, "messages", forced_locale)|nl2br }}
+        </p>
+        
+    </div>
+
+    <hr/>
+
+    <div class="btn-group" role="group">
+        <a href="{{ path('welcome_intro_step', {_locale: forced_locale, step: 2}) }}" type="button" class="btn btn-default btn-warning">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> {{ 'welcome_intro_greeting_back' | trans({}, "messages", forced_locale) }}
+        </a>
+        {% if forced_locale in supportedLanguages %}
+            <a href="{{ path('fos_user_registration_register') }}"type="button" class="btn btn-default btn-success">
+                <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> {{ 'welcome_intro_register' | trans({}, "messages", forced_locale) }}&nbsp;<i class="fa fa-arrow-right" aria-hidden="true"></i>
+            </a>
+        {% endif %}
+    </div>
+
+{% endblock %}

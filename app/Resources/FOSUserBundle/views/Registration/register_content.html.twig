@@ -1,0 +1,7 @@
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="page-header"><h2>{{ 'title_register' | trans({}, 'messages') }}</h2></div>
+
+{{ form(form) }}

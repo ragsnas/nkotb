@@ -1,0 +1,16 @@
+{
+    "success": {{ success ? '1' : '0'}},
+    "result": [
+    {{ for event in events }}
+        {
+            "id": {{ event.id }},
+            "title": "{{ event.title }}",
+            "url": "{{ '' }}",
+            "class": "event-important",
+            "start": {{ event.start | date("U") }},
+            "end": {{ event.start | date("U") }}
+        }
+        {{ if not loop.last }},{{ endif }}
+    {{ endfor }}
+    ]
+}

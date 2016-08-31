@@ -1,0 +1,31 @@
+{
+  "name": "sak",
+  "version": "1.0.0",
+  "authors": [
+    "rags"
+  ],
+  "description": "SAK",
+  "keywords": [
+    "symfony2"
+  ],
+  "private": true,
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/Resources/bower",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "Bootstrap-Confirmation": "git@github.com:ethaizone/Bootstrap-Confirmation.git",
+    "bootstrap-calendar": "~0.2.4",
+    "bootstrap-datepicker": "~1.6.0",
+    "components-font-awesome": "~4.4.0",
+    "jquery": "~2.1.4"
+  },
+  "devDependencies": {
+  }
+}

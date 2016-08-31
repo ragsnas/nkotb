@@ -1,0 +1,84 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>User</h1>
+
+    <table class="record_properties table table-striped">
+        <tbody>
+            <tr>
+                <th>{{ 'user_fields_id'|trans }}</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'user_fields_username'|trans }}</th>
+                <td>{{ entity.username }}</td>
+            </tr>
+{#
+            <tr>
+                <th>{{ 'user_fields_usernameCanonical'|trans }}</th>
+                <td>{{ entity.usernameCanonical }}</td>
+            </tr>
+#}
+            <tr>
+                <th>{{ 'user_fields_email'|trans }}</th>
+                <td>{{ entity.email }}</td>
+            </tr>
+{#            <tr>
+                <th>{{ 'user_fields_emailCanonical'|trans }}</th>
+                <td>{{ entity.emailCanonical }}</td>
+            </tr>#}
+            <tr>
+                <th>{{ 'user_fields_enabled'|trans }}</th>
+                <td>{{ ('common_' ~ (entity.locked ? 'yes' : 'no')) | trans }}</td>
+
+            </tr>
+            {% if entity.lastLogin %}
+            <tr>
+                <th>{{ 'user_fields_lastLogin'|trans }}</th>
+                <td>{{ entity.lastLogin | date('c')}}</td>
+            </tr>
+            {% endif %}
+            {% if entity.confirmationToken %}
+            <tr>
+                <th>{{ 'user_fields_confirmationToken'|trans }}</th>
+                <td>{{ entity.confirmationToken }}</td>
+            </tr>
+            {% endif %}
+            {% if entity.passwordRequestedAt %}
+            <tr>
+                <th>{{ 'user_fields_passwordRequestedAt'|trans }}</th>
+                <td>{{ entity.passwordRequestedAt | date('c')}}</td>
+            </tr>
+            {% endif %}
+            {% if entity.groups %}
+            <tr>
+                <th>{{ 'user_fields_groups'|trans }}</th>
+                <td>{{ entity.groups }}</td>
+            </tr>
+            {% endif %}
+            <tr>
+                <th>{{ 'user_fields_locked'|trans }}</th>
+                <td>{{ ('common_' ~ (entity.locked ? 'yes' : 'no')) | trans }}</td>
+            </tr>
+
+{#            <tr>
+                <th>{{ 'user_fields_credentialsExpireAt'|trans }}</th>
+                <td>{{ entity.credentialsExpireAt }}</td>
+            </tr>#}
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('user') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('user_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="container text-center">
+        <h1><strong>{{ status_code }} {{ status_text }}</strong></h1>
+
+        <h4>The server returned a "{{ status_code }} {{ status_text }}".</h4>
+    </div>
+{% endblock %}

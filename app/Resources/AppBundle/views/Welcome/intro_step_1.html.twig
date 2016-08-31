@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+        <h2>{{ 'welcome_intro_step_1_title' | trans({}, "messages", forced_locale) }}</h2>
+        <p>
+            {{ 'welcome_intro_step_1_text' | trans({}, "messages", forced_locale) }}
+        </p>
+
+        <div class="col-md-6">
+            <ul class="media-list">
+                <li class="media">
+                    <div class="media-left">
+                        <img class="media-object" width="200" src="/images/welcome/towel.jpg" alt="two towels">
+                    </div>
+                    <div class="media-body">
+                        <h3 class="media-heading">{{ 'welcome_intro_step_1_tobring_towels' | trans({}, "messages", forced_locale) |nl2br }}</h3>
+                        <p>{{ 'welcome_intro_step_1_tobring_towels_text' | trans({}, "messages", forced_locale) }}</p>
+                    </div>
+                </li>
+                <li class="media">
+                    <div class="media-left">
+                        <img class="media-object" width="200" src="/images/welcome/clothes.jpg" alt="two towels">
+                    </div>
+                    <div class="media-body">
+                        <h3 class="media-heading">{{ 'welcome_intro_step_1_tobring_clothes' | trans({}, "messages", forced_locale) |nl2br }}</h3>
+                        <p>{{ 'welcome_intro_step_1_tobring_clothes_text' | trans({}, "messages", forced_locale) }}</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <ul class="media-list">
+                <li class="media">
+                    <div class="media-left">
+                        <img class="media-object" width="200" src="/images/welcome/shoes.jpg" alt="two towels">
+                    </div>
+                    <div class="media-body">
+                        <h3 class="media-heading">{{ 'welcome_intro_step_1_tobring_shoes' | trans({}, "messages", forced_locale) |nl2br }}</h3>
+                        <p>{{ 'welcome_intro_step_1_tobring_shoes_text' | trans({}, "messages", forced_locale) }}</p>
+                    </div>
+                </li>
+                <li class="media">
+                    <div class="media-left">
+                        <img class="media-object" width="200" src="/images/welcome/showergel.jpg" alt="two towels">
+                    </div>
+                    <div class="media-body">
+                        <h3 class="media-heading">{{ 'welcome_intro_step_1_tobring_showergel' | trans({}, "messages", forced_locale) |nl2br }}</h3>
+                        <p>{{ 'welcome_intro_step_1_tobring_showergel_text' | trans({}, "messages", forced_locale) }}</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <hr/>
+
+    <div class="btn-group" role="group">
+        {% if forced_locale in supportedLanguages %}
+            <a href="{{ path('welcome_intro_step', {_locale: forced_locale, step: 2}) }}" type="button" class="btn btn-default btn-success">
+                {{ 'welcome_intro_greeting_next' | trans({}, "messages", forced_locale) }}&nbsp;<i class="fa fa-arrow-right" aria-hidden="true"></i>
+            </a>
+        {% endif %}
+    </div>
+
+{% endblock %}

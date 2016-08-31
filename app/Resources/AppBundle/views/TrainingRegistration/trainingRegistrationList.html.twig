@@ -1,0 +1,34 @@
+<table class="records_list table table-striped">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Training</th>
+        <th>Name</th>
+        <th>Showedup</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for entity in pagination %}
+        <tr class="{% if entity.showedUp is null%}warning{% elseif entity.showedUp == true %}success{% else %}danger{% endif %}">
+            <td><a href="{{ path('training_registration_admin_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.training.title }} / {{ entity.training.start|date('d.m.Y H:i') }}</td>
+            <td>{{ entity.user.username }}</td>
+            <td>{{ entity.showedUp }}</td>
+            <td>
+                <a href="{{ path('training_registration_admin_edit', { 'id': entity.id }) }}" title="{{ 'common_edit'|trans }}">
+                    <i class="fa fa-pencil-square-o"></i>
+                </a>
+                &nbsp;
+                <a href="{{ path('training_registration_admin_set_showedup', { 'id': entity.id }) }}" title="{{ 'training_registration_showedup'|trans }}">
+                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                </a>
+                &nbsp;
+                <a href="{{ path('training_registration_admin_set_notshowedup', { 'id': entity.id }) }}" title="{{ 'training_registration_notshowedup'|trans }}">
+                    <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

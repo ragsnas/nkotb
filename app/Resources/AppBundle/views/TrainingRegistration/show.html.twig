@@ -1,0 +1,27 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>TrainingRegistration</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Showedup</th>
+                <td>{{ entity.showedUp }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="btn-group">
+        <a href="{{ path('training_registration_admin') }}" class="btn btn-primary">
+            <i class="fa fa-list"></i> {{ 'common_back-to-list'|trans }}
+        </a>
+        <a href="{{ path('training_registration_admin_edit', { 'id': entity.id }) }}"  class="btn btn-primary">
+            <i class="fa fa-edit"></i> {{ 'common_edit'|trans }}
+        </a>
+    </div>
+{% endblock %}

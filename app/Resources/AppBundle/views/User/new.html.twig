@@ -1,0 +1,15 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>User creation</h1>
+
+    {{ form(form) }}
+
+    <hr/>
+
+    <div class="record_actions btn-group">
+        <a href="{{ path('user') }}" class="btn btn-primary">
+            {{ 'common_back-to-list'|trans }}
+        </a>
+    </div>
+{% endblock %}

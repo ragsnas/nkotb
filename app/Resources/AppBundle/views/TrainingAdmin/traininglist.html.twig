@@ -1,0 +1,34 @@
+<table class="records_list table table-striped">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Type</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Destinaton</th>
+        <th>Spots</th>
+        <th>Registrations</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+    <tr class="{% if date(entity.start) < date() %}active{% elseif entity.isFullyBooked() %}danger{% elseif not entity.trainingRegistrations or entity.trainingRegistrations|length < (entity.spots/2) %}warning{% elseif entity.trainingRegistrations and entity.trainingRegistrations|length > (entity.spots/2) %}success{% endif %}">
+        <td><a href="{{ path('training_admin_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+        <td><a href="{{ path('training_admin_show', { 'id': entity.id }) }}">{{ entity.title }}</a></td>
+        <td>{{ entity.type }}</td>
+        <td>{% if entity.start %}{{ entity.start|date('Y-m-d H:i:s') }}{% endif %}</td>
+        <td>{% if entity.end %}{{ entity.end|date('Y-m-d H:i:s') }}{% endif %}</td>
+        <td>{{ entity.destinaton }}</td>
+        <td>{{ entity.spots }}</td>
+        <td>{{ entity.trainingRegistrations ? entity.trainingRegistrations|length : '0' }}</td>
+        <td>
+            <a href="{{ path('training_admin_edit', { 'id': entity.id }) }}" title="{{ 'common_edit'|trans }}">
+                <i class="fa fa-pencil-square-o"></i>
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>

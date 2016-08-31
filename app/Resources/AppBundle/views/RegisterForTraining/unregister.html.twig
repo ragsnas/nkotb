@@ -1,0 +1,10 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>{{ 'training_unregister'|trans }}</h1>
+
+    <p>{{ 'training_unregister_disclaimer'|trans }}</p>
+
+    {{ form(registerForm) }}
+
+{% endblock %}

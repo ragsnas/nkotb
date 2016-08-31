@@ -1,0 +1,66 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <header>
+        <nav class="navbar navbar-inverse navbar-fixed-top"  role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">{{ 'website_title'|trans }}</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                            <li><a href="#">Hello, {{ app.user.username }}</a></li>
+                            <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out"></i> {{ 'navigation_logout' | trans }}</a></li>
+                        {% else %}
+                            <li><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in"></i> {{ 'navigation_login' | trans }}</a></li>
+                            <li><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-user-plus"></i> {{ 'navigation_register' | trans }}</a></li>
+                        {% endif %}
+                    </ul>
+                    <ul class="nav navbar-nav">
+                        {% if is_granted('ROLE_USER') %}
+                            <li><a href="{{ path('homepage') }}">{{ 'navigation_homepage'|trans }}</a></li>
+                        {% endif %}
+                        {% if is_granted('ROLE_TRAINING_ADMIN') %}
+                            {#<li><a href="{{ path('training_registration_admin') }}">{{ 'navigation_training_registration_admin' | trans }}</a></li>#}
+                            <li><a href="{{ path('training_admin') }}">{{ 'navigation_training_admin' | trans }}</a></li>
+                        {% endif %}
+                        {% if is_granted('ROLE_USER_ADMIN') %}
+                            <li><a href="{{ path('user') }}">{{ 'navigation_user' | trans }}</a></li>
+                        {% endif %}
+                        <li><a href="{{ path('info', {kind: 'about'}) }}">{{ 'navigation_info_about'|trans }}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+
+        {% for type, messages in app.session.flashbag.all() %}
+            <div class="alert alert-{{ type == 'error' ? 'danger' : type }} alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'alert_close' | trans }}</span></button>
+                {% for message in messages %}
+                    {{ message | trans }}
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        <div class="row">
+            <div class="col-md-2">
+                <img src="/images/logo.svg" style="width:100%" alt="New Kits On The Block Cyling Logo"/>
+            </div>
+            <div class="col-md-10">
+                {% block body -%}{%- endblock %}
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

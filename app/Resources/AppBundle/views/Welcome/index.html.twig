@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h2>
+        {{ 'welcome_intro_greeting_title' | trans({}, "messages", 'de') | nl2br }}
+    </h2>
+
+    <div>
+        {{ 'welcome_intro_greeting_text' | trans({}, "messages", 'de')| raw | nl2br }}
+    </div>
+
+    <hr/>
+
+    <p class="pull-right"><a class="btn btn-default btn-primary" href="{{ path('welcome_intro_step', {step: 1, _locale: 'de'}) }}">
+        {{ 'welcome_intro_greeting__register' | trans({}, "messages", 'de') }}
+    </a></p>
+
+    <p class="pull-left"><a class="btn btn-default btn-success" href="{{ path('welcome_intro_step', {step: 1, _locale: 'de'}) }}">
+        {{ 'welcome_intro_greeting__read_more' | trans({}, "messages", 'de') }}
+    </a></p>
+
+{% endblock %}

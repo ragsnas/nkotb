@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+        <h3>
+            {{ 'info_about_title' | trans({}, "messages", 'de') | nl2br }}
+        </h3>
+
+        <p>
+            {{ 'info_about_text' | trans({}, "messages", 'de') | nl2br }}
+        </p>
+    </div>
+
+    <hr/>
+
+    <div class="row">
+
+        <p class=" pull-right"><a class="btn btn-default btn-success" href="{{ path('welcome_intro_step', {step: 1, _locale: 'de'}) }}">
+                {{ 'welcome_intro_greeting' | trans({}, "messages", 'de') }}
+            </a></p>
+    </div>
+
+
+
+
+{% endblock %}

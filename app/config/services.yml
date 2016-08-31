@@ -1,0 +1,42 @@
+parameters:
+#    parameter_name: value
+
+services:
+    appbundle.twig.extension:
+        class: AppBundle\Twig\Extension
+        tags:
+            - { name: twig.extension }
+
+    appbundle.registration.form.type:
+        class: AppBundle\Form\Type\RegistrationFormType
+        tags:
+            - { name: form.type, alias: app_registration }
+
+    appbundle.resetting.form.type:
+        class: AppBundle\Form\Type\PasswordResettingFormType
+        tags:
+            - { name: form.type, alias: app_resetting }
+
+    appbundle.repository.abstractappointment:
+        class: AppBundle\Entity\Repository\AbstractAppointmentRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - AppBundle:AbstractAppointment
+
+    appbundle.repository.appointment:
+        class: AppBundle\Entity\Repository\AppointmentRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - AppBundle:Appointment
+
+    appbundle.service.calendarevent:
+        class: AppBundle\Services\CalendarEventService
+        arguments: [@appbundle.repository.appointment, @appbundle.repository.abstractappointment]
+        tags:
+            - { name: form.type, alias: app_resetting }
+
+    app.locale_listener:
+        class: AppBundle\Listener\LocaleListener
+        arguments: ['%kernel.default_locale%']
+        tags:
+            - { name: kernel.event_subscriber }
